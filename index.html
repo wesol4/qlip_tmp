@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QLIP - Motion + VFX</title>
+    <link href="https://fonts.google.com/specimen/Figtree?preview.script=Latn" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Didact Gothic', sans-serif;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        /* Kontener wideo */
+        .hero-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Przełączanie wideo (Desktop vs Mobile) */
+        .video-mobile { display: none; }
+        @media (max-aspect-ratio: 1/1) {
+            .video-desktop { display: none; }
+            .video-mobile { display: block; }
+        }
+
+        /* Overlay i Content */
+        .overlay {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        /* Logo na środku */
+        .logo-wrapper {
+            width: 80%;
+            max-width: 500px;
+            filter: drop-shadow(0px 0px 20px rgba(0,0,0,0.5));
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-wrapper svg {
+            width: 100%;
+            height: auto;
+            fill: #000; /* Kolor logo - możesz zmienić na #fff jeśli ma być białe */
+        }
+
+        /* Napisy w rogach */
+        .footer-text {
+            position: absolute;
+            bottom: 40px;
+            width: calc(100% - 80px);
+            display: flex;
+            justify-content: space-between;
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 600px) {
+            .footer-text {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                bottom: 30px;
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Delikatny efekt wejścia */
+        .fade-in {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-video-container">
+        <video class="video-desktop" autoplay muted loop playsinline>
+            <source src="https://kucharczuk.eu/qlip/pion.mp4" type="video/mp4">
+        </video>
+        <video class="video-mobile" autoplay muted loop playsinline>
+            <source src="https://kucharczuk.eu/qlip/poziom.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <main class="overlay">
+        <div class="logo-wrapper fade-in">
+            <img src="https://kucharczuk.eu/qlip/qlip.svg" alt="QLIP Logo">
+        </div>
+
+        <div class="footer-text">
+            <div>Motion + VFX</div>
+            <div>Under Construction</div>
+        </div>
+    </main>
+
+</body>
+</html>
