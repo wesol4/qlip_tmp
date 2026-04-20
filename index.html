@@ -15,6 +15,7 @@
 
         body, html {
             height: 100%;
+            width: 100%;
             overflow: hidden;
             background-color: #000;
             font-family: 'Didact Gothic', sans-serif;
@@ -29,78 +30,86 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1;
+            z-index: 0;
         }
 
         video {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
         }
 
-        /* Przełączanie wideo (Desktop vs Mobile) */
+        /* Responsywne wideo */
         .video-mobile { display: none; }
         @media (max-aspect-ratio: 1/1) {
             .video-desktop { display: none; }
             .video-mobile { display: block; }
         }
 
-        /* Overlay i Content */
+        /* Warstwa treści */
         .overlay {
             position: relative;
+            z-index: 10;
             height: 100vh;
             width: 100vw;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 40px;
         }
 
-        /* Logo na środku */
+        /* Logo PNG na środku */
         .logo-wrapper {
             width: 80%;
-            max-width: 500px;
-            filter: drop-shadow(0px 0px 20px rgba(0,0,0,0.5));
-            transition: transform 0.3s ease;
+            max-width: 600px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 2s ease-out forwards;
         }
         
         .logo-wrapper img {
             width: 100%;
             height: auto;
-            filter: brightness(0) invert(1); /* białe logo na czarnym tle */
+            /* Poprawa renderowania krawędzi dla plików graficznych */
+            image-rendering: -webkit-optimize-contrast; 
+            filter: drop-shadow(0px 4px 15px rgba(0,0,0,0.4));
         }
 
         /* Napisy w rogach */
         .footer-text {
             position: absolute;
             bottom: 40px;
-            width: calc(100% - 80px);
+            left: 40px;
+            right: 40px;
             display: flex;
             justify-content: space-between;
             font-weight: 900;
             letter-spacing: 2px;
-            font-size: 1.2rem;
+            font-size: 2.1rem;
+            z-index: 20;
+            pointer-events: none; /* Napisy nie blokują kliknięć */
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .footer-text {
                 flex-direction: column;
                 align-items: center;
-                gap: 15px;
+                gap: 12px;
                 bottom: 30px;
                 font-size: 0.9rem;
+                text-align: center;
+            }
+            .logo-wrapper {
+                width: 90%;
             }
         }
 
-        /* Delikatny efekt wejścia */
-        .fade-in {
-            animation: fadeIn 1.5s ease-out forwards;
-        }
-
+        /* Animacja wejścia */
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -116,8 +125,8 @@
     </div>
 
     <main class="overlay">
-        <div class="logo-wrapper fade-in">
-            <img src="https://kucharczuk.eu/qlip/qlip.svg" alt="QLIP Logo">
+        <div class="logo-wrapper">
+            <img src="https://kucharczuk.eu/qlip/qlip.png" alt="QLIP Logo">
         </div>
 
         <div class="footer-text">
